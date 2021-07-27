@@ -4,6 +4,7 @@ import requests
 import os
 from tweepy import api
 from datetime import date, datetime
+from decouple import config
 
 DIAS = [
     'SEGUNDA-FEIRA',
@@ -22,25 +23,26 @@ dia_da_semana = DIAS[dia]
 print(dia_da_semana)
 
 def twitter_api_keys():
-    api_key = ''
-    api_secret_key = ''
-    access_token = ''
-    access_secret_token = ''
+    api_key = config('API_KEY')
+    api_secret_key = config('API_SECRET_KEY')
+    access_token = config('ACCESS_TOKEN')
+    access_secret_token = config('ACCESS_SECRET_TOKEN')
 
     auth = tweepy.OAuthHandler(api_key, api_secret_key)
     auth.set_access_token(access_token, access_secret_token)
     api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
 
+    return api
+
+def tweet_post(url, message):
+    api = twitter_api_keys()
+    
     try:
         api.verify_credentials()
         print("Authentication OK")
     except:
         print("Error during authentication")
 
-    return api
-
-def tweet_post(url, message):
-    api = twitter_api_keys()
     filename = 'day.jpg'
     request = requests.get(url, stream=True)
     if request.status_code == 200:

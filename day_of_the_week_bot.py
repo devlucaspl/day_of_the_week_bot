@@ -1,8 +1,6 @@
-from requests import status_codes
 import tweepy
 import requests
 import os
-from tweepy import api
 from datetime import date, datetime
 from decouple import config
 

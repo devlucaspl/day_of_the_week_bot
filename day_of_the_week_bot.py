@@ -14,11 +14,11 @@ DIAS = [
     'DOMINGO'
 ]
 
-today_date = date.today()
-
-dia = datetime.today().weekday()
-dia_da_semana = DIAS[dia]
-print(dia_da_semana)
+def check_date():
+    dia = datetime.today().weekday()
+    dia_da_semana = DIAS[dia]
+    print(dia_da_semana)
+    return dia_da_semana
 
 def twitter_api_keys():
     api_key = config('API_KEY')
@@ -53,39 +53,34 @@ def tweet_post(url, message):
     else:
         print('Unable to download image')
 
+def taking_photo(dia_da_semana):
+    if dia_da_semana == DIAS[1]:
+        url = "https://res.cloudinary.com/dnq6f7apl/image/upload/v1627068614/bots/day_of_the_week/segunda_lvltvh.jpg"
+        return url
 
-if dia_da_semana == 'SEGUNDA-FEIRA':
-    url = "https://res.cloudinary.com/dnq6f7apl/image/upload/v1627068614/bots/day_of_the_week/segunda_lvltvh.jpg"
-    message = dia_da_semana
-    tweet_post(url, message)
+    elif dia_da_semana == DIAS[2]:
+        url = "https://res.cloudinary.com/dnq6f7apl/image/upload/v1627068615/bots/day_of_the_week/terca_u5ymkt.jpg"
+        return url
 
-if dia_da_semana == 'TERÇA-FEIRA':
-    url = "https://res.cloudinary.com/dnq6f7apl/image/upload/v1627068615/bots/day_of_the_week/terca_u5ymkt.jpg"
-    message = dia_da_semana
-    tweet_post(url, message)
+    elif dia_da_semana == DIAS[3]:
+        url = "https://res.cloudinary.com/dnq6f7apl/image/upload/v1627068614/bots/day_of_the_week/quarta_w5npjs.jpg"
+        return url
 
-if dia_da_semana == 'QUARTA-FEIRA':
-    url = "https://res.cloudinary.com/dnq6f7apl/image/upload/v1627068614/bots/day_of_the_week/quarta_w5npjs.jpg"
-    message = dia_da_semana
-    tweet_post(url, message)
+    elif dia_da_semana == DIAS[4]:
+        url = "https://res.cloudinary.com/dnq6f7apl/image/upload/v1627068614/bots/day_of_the_week/quinta_byfn1l.jpg"
+        return url
 
-if dia_da_semana == 'QUINTA-FEIRA':
-    url = "https://res.cloudinary.com/dnq6f7apl/image/upload/v1627068614/bots/day_of_the_week/quinta_byfn1l.jpg"
-    message = dia_da_semana
-    tweet_post(url, message)
+    elif dia_da_semana == DIAS[5]:
+        url = "https://res.cloudinary.com/dnq6f7apl/image/upload/v1627068615/bots/day_of_the_week/sexta_buanxo.jpg"
+        return url
 
-if dia_da_semana == 'SEXTA-FEIRA':
-    url = "https://res.cloudinary.com/dnq6f7apl/image/upload/v1627068615/bots/day_of_the_week/sexta_buanxo.jpg"
-    message = dia_da_semana
-    tweet_post(url, message)
+    elif dia_da_semana == DIAS[6]:
+        url = "https://res.cloudinary.com/dnq6f7apl/image/upload/v1627068615/bots/day_of_the_week/sabado_vraoir.jpg"
+        return url
 
-if dia_da_semana == 'SÁBADO':
-    url = "https://res.cloudinary.com/dnq6f7apl/image/upload/v1627068615/bots/day_of_the_week/sabado_vraoir.jpg"
-    message = dia_da_semana
-    tweet_post(url, message)
+    elif dia_da_semana == DIAS[7]:
+        url = "https://res.cloudinary.com/dnq6f7apl/image/upload/v1627068615/bots/day_of_the_week/domingo_fvbx7k.jpg"
+        return url
 
-if dia_da_semana == 'DOMINGO':
-    url = "https://res.cloudinary.com/dnq6f7apl/image/upload/v1627068615/bots/day_of_the_week/domingo_fvbx7k.jpg"
-    message = dia_da_semana
-    tweet_post(url, message)
-
+def _main_():
+    tweet_post(taking_photo(), check_date())

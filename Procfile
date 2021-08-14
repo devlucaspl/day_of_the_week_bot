@@ -1,1 +1,0 @@
-worker: python day_of_the_week_bot.py

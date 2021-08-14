@@ -1,7 +1,8 @@
 import tweepy
 import requests
 import os
-from datetime import datetime
+import time
+from datetime import datetime, time
 from decouple import config
 
 DIAS = [
@@ -15,9 +16,12 @@ DIAS = [
 ]
 
 def main():
-    message = check_date()
-    url = taking_photo(message)
-    tweet_post(url, message)
+    api = twitter_api_keys()
+    while True:
+        message = check_date()
+        url = taking_photo(message)
+        tweet_post(api, url, message)
+        time.sleep(86400)
 
 def check_date():
     dia = datetime.today().weekday()
@@ -43,8 +47,7 @@ def twitter_api_keys():
 
     return api
 
-def tweet_post(url, message):
-    api = twitter_api_keys()
+def tweet_post(api, url, message):
 
     filename = 'day.jpg'
     request = requests.get(url, stream=True)
@@ -54,43 +57,44 @@ def tweet_post(url, message):
                 image.write(chunk)
 
         api.update_with_media(filename, status=message)
+      
         os.remove(filename)
     else:
         print('Unable to download image')
 
 def taking_photo(dia_da_semana):
     if dia_da_semana == 'SEGUNDA-FEIRA':
-        url = "https://bityli.com/vC522"
+        url = "https://res.cloudinary.com/dnq6f7apl/image/upload/v1627068614/bots/day_of_the_week/segunda_lvltvh.jpg"
         return url
 
     elif dia_da_semana == 'TERÇA-FEIRA':
-        url = "https://bityli.com/ANbzm"
+        url = "https://res.cloudinary.com/dnq6f7apl/image/upload/v1627068615/bots/day_of_the_week/terca_u5ymkt.jpg"
         return url
 
     elif dia_da_semana == 'QUARTA-FEIRA':
-        url = "encurtador.com.br/hmwCT"
+        url = "https://res.cloudinary.com/dnq6f7apl/image/upload/v1627068614/bots/day_of_the_week/quarta_w5npjs.jpg"
         return url
 
     elif dia_da_semana == 'QUINTA-FEIRA':
-        url = "encurtador.com.br/efrxN"
+        url = "https://res.cloudinary.com/dnq6f7apl/image/upload/v1627068614/bots/day_of_the_week/quinta_byfn1l.jpg"
         return url
 
     elif dia_da_semana == 'SEXTA-FEIRA':
-        url = "encurtador.com.br/drsO8"
+        url = "https://res.cloudinary.com/dnq6f7apl/image/upload/v1627068615/bots/day_of_the_week/sexta_buanxo.jpg"
         return url
 
     elif dia_da_semana == 'SÁBADO':
-        url = "encurtador.com.br/guAJO"
+        url = "https://res.cloudinary.com/dnq6f7apl/image/upload/v1627068615/bots/day_of_the_week/sabado_vraoir.jpg"
         return url
 
     elif dia_da_semana == 'DOMINGO':
-        url = "encurtador.com.br/jyM46"
+        url = "https://res.cloudinary.com/dnq6f7apl/image/upload/v1627068615/bots/day_of_the_week/domingo_fvbx7k.jpg"
         return url
     
     else:
         url = ""
-        return url
-
+        return url    
+    
 # início da execução do programa
 #-----------------------------------------------------
 if __name__ == '__main__': # chamada da funcao principal

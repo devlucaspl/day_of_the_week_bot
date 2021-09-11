@@ -1,1 +1,1 @@
-worker: python day_of_the_week_bot.py
+worker: python bot.py

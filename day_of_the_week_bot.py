@@ -2,7 +2,7 @@ import tweepy
 import requests
 import os
 import time
-from datetime import datetime, time
+from datetime import datetime
 from decouple import config
 
 DIAS = [
